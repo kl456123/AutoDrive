@@ -1,0 +1,20 @@
+syntax="proto2";
+
+
+package detection.protos;
+
+message StringIntLabelMapItem{
+
+    optional string name =1;
+
+    optional int32 id = 2;
+
+    // human readable string label
+    optional string display_name = 3;
+}
+
+
+
+message StringIntLabelMap{
+    repeated StringIntLabelMapItem items=1;
+}

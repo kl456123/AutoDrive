@@ -1,0 +1,15 @@
+items{
+    id: 1
+    name:"Car"
+}
+
+items{
+    id:2
+    name:"Pedestrian"
+}
+
+items{
+
+    id:3
+    name:"Cycylist"
+}

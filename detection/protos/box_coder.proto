@@ -1,0 +1,17 @@
+syntax  = "proto2";
+
+
+package detection.protos;
+
+
+message BoxCoder{
+    /* oneof box_coder_oneof{ */
+
+    /* } */
+}
+
+
+
+message BoxEightCorners{
+
+}

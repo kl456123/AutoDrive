@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+
+package detection.protos;
+
+
+
+import "detection/protos/model.proto";
+import "detection/protos/eval.proto";
+import "detection/protos/train.proto";
+import "detection/protos/dataset.proto";
+
+// Convenience message for configuring a training and eval pipeline.
+// Allows all of the pipeline parameters to be configured from one file.
+message NetworkPipelineConfig{
+    optional ModelConfig model_config = 1;
+    optional TrainConfig train_config = 2;
+    optional EvalConfig eval_config = 3;
+    optional DatasetConfig dataset_config = 4;
+}

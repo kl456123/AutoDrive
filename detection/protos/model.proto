@@ -1,0 +1,61 @@
+syntax = "proto2";
+
+
+package detection.protos;
+
+
+import "detection/protos/loss.proto";
+import "detection/protos/box_coder.proto";
+
+
+
+message ModelConfig{
+    optional int32 num_classes = 1;
+
+    // bounding box representation, one of ['box_3d', 'box_8c']
+    optional string pc_box_representation = 2;
+
+
+    /* required BoxCoder box_coder = 2; */
+
+    optional FeatureExtractor img_feature_extractor = 3;
+
+    optional PointNetConfig pointnet_config = 4;
+
+    optional Loss loss = 5;
+
+    optional float rpn_nms_iou_threshold = 6;
+
+    optional int32 rpn_nms_size = 7;
+
+    optional string model_name = 8;
+
+    // base model(e,g resent50,resnet101)
+    optional string backbone = 9;
+
+    // train val or test
+    optional string train_val_test = 10;
+    /* required RpnConfig img_rpn_config = 6; */
+
+    /* required RpnConfig pc_rpn_config = 7; */
+}
+
+
+
+message RpnConfig{
+    optional float nms_iou_threshold = 1;
+    optional int32 nms_size = 2;
+}
+
+
+message FeatureExtractor{
+    // type of img feature extractor(i,e, resnet,vggnet)
+    optional string type = 1;
+}
+
+
+
+
+message PointNetConfig{
+
+}
