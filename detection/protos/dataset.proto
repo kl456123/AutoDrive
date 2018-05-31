@@ -49,7 +49,7 @@ message DatasetConfig {
     optional bool shuffle = 14 [default=true];
     
     // default is rgb image
-    optional int32 img_depth = 15 [default=3]
+    optional int32 img_depth = 15 [default=3];
 
     // KittiUtils configuration
     /* optional KittiUtilsConfig kitti_utils_config = 20; */

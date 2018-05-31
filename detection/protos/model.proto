@@ -6,6 +6,7 @@ package detection.protos;
 
 import "detection/protos/loss.proto";
 import "detection/protos/box_coder.proto";
+import "detection/protos/anchor_generator.proto";
 
 
 
@@ -15,7 +16,6 @@ message ModelConfig{
     // bounding box representation, one of ['box_3d', 'box_8c']
     optional string pc_box_representation = 2;
 
-
     /* required BoxCoder box_coder = 2; */
 
     optional FeatureExtractor img_feature_extractor = 3;
@@ -24,10 +24,6 @@ message ModelConfig{
 
     optional Loss loss = 5;
 
-    optional float rpn_nms_iou_threshold = 6;
-
-    optional int32 rpn_nms_size = 7;
-
     optional string model_name = 8;
 
     // base model(e,g resent50,resnet101)
@@ -35,6 +31,8 @@ message ModelConfig{
 
     // train val or test
     optional string train_val_test = 10;
+
+    optional RpnConfig rpn_config = 11;
     /* required RpnConfig img_rpn_config = 6; */
 
     /* required RpnConfig pc_rpn_config = 7; */
@@ -43,9 +41,17 @@ message ModelConfig{
 
 
 message RpnConfig{
-    optional float nms_iou_threshold = 1;
-    optional int32 nms_size = 2;
+    optional float rpn_negative_overlap = 4;
+    optional float rpn_positive_overlap = 5;
+    optional float rpn_clobber_positives = 6;
+    optional float positive_fraction = 7;
+    optional int32 rpn_mini_batch_size = 8;
+
+    optional float rpn_nms_iou_threshold = 1;
+    optional int32 rpn_nms_size = 2;
+    optional MultipleGridAnchorGeneratorConfig anchor_generator_config= 3;
 }
+
 
 
 message FeatureExtractor{

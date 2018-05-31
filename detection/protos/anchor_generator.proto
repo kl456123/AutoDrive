@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+package detection.protos;
+
+
+message AnchorGeneratorConfig{
+    optional MultipleGridAnchorGeneratorConfig multiple_grid_anchor_generator_config = 2;
+}
+
+
+message GridAnchorGeneratorConfig{
+}
+
+
+message MultipleGridAnchorGeneratorConfig{
+    optional string type = 9 [default="multiple_grid"];
+    repeated float scales=1;
+    repeated float ratios=2;
+    optional int32 min_level=3;
+    optional int32 max_level=4;
+    optional float anchor_scale=5;
+    repeated float base_anchor_sizes=6;
+    /* repeated int32 featmap_shape_list = 7; */
+    repeated int32 anchor_stride_list = 8;
+}
+

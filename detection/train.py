@@ -35,10 +35,14 @@ def train(config):
 
     model_config = config["model_config"]
     model_name = model_config.model_name
+
+    # override config
+    training = True
+
     if model_name == "fpointnet_model":
-        model = FPointnetModel(model_config, dataset)
+        model = FPointnetModel(model_config, dataset, training)
     elif model_name == "maskrcnn_model":
-        model = MaskRCNNModel(model_config, dataset)
+        model = MaskRCNNModel(model_config, dataset, training)
 
     train_config = config["train_config"]
     trainer.train(model, train_config)

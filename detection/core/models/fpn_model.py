@@ -14,16 +14,18 @@ class FPNModel(DetectionModel):
     KEY_FPN_P5 = 'fpn_p5'
     KEY_FPN_P6 = 'fpn_p6'
 
-    def __init__(self, model_config, dataset):
+    def __init__(self, model_config, dataset,training=True):
         super().__init__(model_config)
         self.backbone = model_config.backbone
         self.backbone in ['resnet50', 'resnet101']
+        loss_config = model_config['loss']
+        self._weight_decay = loss_config['weight_decay']
 
         self.is_training = model_config == 'train'
 
     def _build_resnet50(self, inputs=None):
         return resnet_util.resnet_graph(inputs, self.backbone,
-                                        self.is_training)
+                                        self.is_training, self.backbone, self._weight_decay)
 
     def _build_pyramid(self, Cn):
         C1, C2, C3, C4, C5 = Cn
@@ -57,11 +59,13 @@ class FPNModel(DetectionModel):
             return [P2, P3, P4, P5, P6], [P2, P3, P4, P5]
 
     def build(self, inputs=None):
-        rpn_feature_maps, mrcnn_feature_maps = self._build_resnet50(inputs)
-        prediction_dict = dict(
-            zip(['rpn_feature_maps', 'mrcnn_feature_maps'],
-                [rpn_feature_maps, mrcnn_feature_maps]))
-        return prediction_dict
+        Cn = self._build_resnet50(inputs)
+        return self._build_pyramid(Cn)
+        # rpn_feature_maps, mrcnn_feature_maps = self._build_pyramid(Cn)
+        # prediction_dict = dict(
+        # zip(['rpn_feature_maps', 'mrcnn_feature_maps'],
+        # [rpn_feature_maps, mrcnn_feature_maps]))
+        # return prediction_dict
 
     def loss(self):
         pass

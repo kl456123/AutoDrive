@@ -11,7 +11,7 @@ slim = tf.contrib.slim
 
 
 def get_summary_dir(log_dir):
-    datatime_str = str(datatime.datatime.now())
+    datatime_str = str(datetime.datetime.now())
     return os.path.join(log_dir, 'train', datatime_str)
 
 

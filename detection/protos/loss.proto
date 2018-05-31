@@ -5,5 +5,5 @@ package detection.protos;
 
 
 message Loss{
-
+    optional float weight_decay = 1[default=0.00005];
 }
